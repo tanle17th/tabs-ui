@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <div>
+        <!-- Tab items -->
+        <div class="tabs">
+            <div class="tab-item active">
+                <i class="tab-icon fas fa-code"></i> React
+            </div>
+            <div class="tab-item"><i class="tab-icon fas fa-cog"></i> Angular</div>
+            <div class="tab-item">
+                <i class="tab-icon fas fa-plus-circle"></i> Ember
+            </div>
+            <div class="tab-item">
+                <i class="tab-icon fas fa-pen-nib"></i> Vue.JS
+            </div>
+            <div class="line"></div>
+        </div>
+
+        <!-- Tab content -->
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <h2>React</h2>
+                <p>
+                    React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.
+                </p>
+            </div>
+            <div class="tab-pane">
+                <h2>Angular</h2>
+                <p>
+                    Angular is an application design framework and development platform for creating efficient and sophisticated single-page apps.
+                </p>
+            </div>
+            <div class="tab-pane">
+                <h2>Ember</h2>
+                <p>
+                    Ember.js is a productive, battle-tested JavaScript framework for building modern web applications. It includes everything you need to build rich UIs that work on any device.
+                </p>
+            </div>
+            <div class="tab-pane">
+                <h2>Vue.js</h2>
+                <p>
+                    Vue (pronounced /vjuː/, like view) is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Replace document.querySelector with $
+        // Replace document.querySelectorAll with $$
+        const $ = document.querySelector.bind(document);
+        const $$ = document.querySelectorAll.bind(document);
+
+        // Query all tabs && panes
+        const tabs = $$(".tab-item");
+        const panes = $$(".tab-pane");
+
+        // get current active tab and the line
+        const tabActive = $(".tab-item.active");
+        console.log([tabActive]);
+        const line = $(".tabs .line");
+        console.log([line]);
+
+        // set line will be under React by default (React is active by default)
+        line.style.left = tabActive.offsetLeft + "px";
+        line.style.width = tabActive.offsetWidth + "px";
+
+        // Loop && add onclick for each tab
+        tabs.forEach((tab, index) => {
+            tab.onclick = () => {
+                // click on each tab remove active on the current tab
+                // && add active on the that tab
+                $(".tab-item.active").classList.remove("active");
+                tab.classList.add("active");
+
+                // tabs.index == panes.index
+                // use tabs index to do the same thing for panes
+                $(".tab-pane.active").classList.remove("active");
+                panes[index].classList.add("active");
+
+                // use DOM properties of tabs to set style
+                // of the LINE
+                // left && width of LINE must match
+                // offsetLeft && offsetWidth of TAB
+                line.style.left = tab.offsetLeft + "px";
+                line.style.width = tab.offsetWidth + "px";
+            };
+        });
+    </script>
+</body>
+
+</html>
